@@ -10,7 +10,6 @@ namespace Projet
         private Epargne compteEpargne;
         private List<Client> listeClients;
 
-
         public Guichet(List<Client> listeClients)
         {
             this.listeClients = listeClients;
