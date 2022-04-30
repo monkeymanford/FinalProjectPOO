@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Projet
 {
@@ -7,18 +8,20 @@ namespace Projet
         private Client client;
         private Cheque comptecheque;
         private Epargne compteEpargne;
-        private static string saisieUser;
-        private static string saisieNIP;
+        private List<Client> listeClients;
 
 
-        public bool ValiderUtilisateur(string nom, int nip)
+        public Guichet(List<Client> listeClients)
         {
-            Console.Clear();
-            Console.Write("Veuillez entrer votre nom d'utilisateur: ");
-            saisieUser = Console.ReadLine();
-            Console.Write("\r\nVeuillez entrer votre NIP: ");
-            saisieNIP = Console.ReadLine();
+            this.listeClients = listeClients;
+        }
 
+        public bool ValiderUtilisateur(string user, string nip)
+        {
+            foreach (Client x in listeClients)
+            {
+                if (string.Equals(x.getUser(), user) && string.Equals(x.getNIP(), nip)) return false;
+            }
             return true;
         }
 
