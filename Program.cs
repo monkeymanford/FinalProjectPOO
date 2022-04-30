@@ -1,24 +1,32 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Projet
 {
     // utiliser liste clients, liste comptes
     // utiliser polymorphisme ?pour génération des rapports?, tous les comptes ch et ep sont des comptes.
 
-
-
     class Program
     {
         static void Main(string[] args)
        {
+            IList<Client> listeClients = new List<Client>();
+
+            Client client1 = new Client("Ghandi", "Lee", "glee", "1234");
+            Client client2 = new Client("Ezekiel", "Ciel", "ezewu", "2345");
+            Client client3 = new Client("Miriam", "Yang", "miyang", "3456");
+
+            listeClients.Add(client1);
+            listeClients.Add(client2);
+            listeClients.Add(client3);
+
             bool showMenu = true;
             while (showMenu)
             {
-                showMenu = MenuPrincipal();
+                showMenu = Guichet.MenuPrincipal();
             }
-        }
 
-        private static bool MenuPrincipal()
+            static bool MenuPrincipal()
         {
             Console.Clear();
             Console.WriteLine("Choisir une option:");
@@ -45,6 +53,9 @@ namespace Projet
                     return true;
             }
         }
+        }
+
+
 
     }
 }

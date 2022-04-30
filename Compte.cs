@@ -2,7 +2,7 @@ namespace Projet
 {
     public class Compte
     {
-        private int numeroNIP;
+        private string numeroNIP;
         private int numeroCompte;
         private double soldeCompte;
 
