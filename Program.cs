@@ -84,13 +84,24 @@ namespace Projet
                 switch (Console.ReadLine())
                 {
                     case "1":
+                        Console.Clear();
                         Console.WriteLine("Un dépôt dans quel compte ?");
                         Console.WriteLine("1) Compte chèque");
                         Console.WriteLine("2) Compte épargne");
                         Console.Write("\r\nSelectionner une option: ");
-                        Console.ReadLine();
+                        
+                        
+                        if (Console.ReadLine() == 1)
+                        {
+                            Console.Clear();
+                            Console.Write("Veuillez saisir le montant: ");
+
+                        }
+
+
                         return true;
                     case "2":
+                        Console.Clear();
                         Console.WriteLine("Un retrait dans quel compte ?");
                         Console.WriteLine("1) Compte chèque");
                         Console.WriteLine("2) Compte épargne");
@@ -98,6 +109,7 @@ namespace Projet
                         Console.ReadLine();
                         return true;
                     case "3":
+                        Console.Clear();
                         Console.WriteLine("Un Virement de quel à quel compte ?");
                         Console.WriteLine("1) De compte chèque vers compte épargne");
                         Console.WriteLine("2) de compte épargne vers compte chèque");
@@ -105,6 +117,7 @@ namespace Projet
                         Console.ReadLine();
                         return true;
                     case "4":
+                        Console.Clear();
                         Console.WriteLine("Merci d'avoir utilisé le service ToutCrocheInc.");
                         Console.ReadLine();
                         return false;

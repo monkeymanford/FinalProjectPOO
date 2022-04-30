@@ -6,7 +6,7 @@ namespace Projet
     public class Guichet
     {
         private Client client;
-        private Cheque comptecheque;
+        private Cheque compteCheque;
         private Epargne compteEpargne;
         private List<Client> listeClients;
 
@@ -19,7 +19,12 @@ namespace Projet
         {
             foreach (Client x in listeClients)
             {
-                if (string.Equals(x.getUser(), user) && string.Equals(x.getNIP(), nip)) return false;
+                if (string.Equals(x.getUser(), user) && string.Equals(x.getNIP(), nip)) 
+                {
+                    this.compteCheque = x.NumeroCompteCheque;
+                    this.compteEpargne = x.NumeroCompteEpargne;
+                    return false;
+                }
             }
             return true;
         }
