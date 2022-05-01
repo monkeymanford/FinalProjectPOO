@@ -44,7 +44,7 @@ namespace Projet
             {
                 if (tentatives >= 3) // après trois tentative, le guichet rejète l'utilisateur
                 {
-                    TropEssais();
+                    Messages.TropEssais();
                     showMenu = false;
                     break;
                 }
@@ -87,21 +87,18 @@ namespace Projet
                     case "3":
                         if (guichet.CheckCheque() && guichet.CheckEpargne())
                             Virement();
-                        else CompteManquant();
+                        else Messages.CompteManquant();
                         return true;
 
                     case "4":
-                        AuRevoir();
+                        Messages.AuRevoir();
                         return false;
 
                     default:
-                        ChoixInvalide();
+                        Messages.ChoixInvalide();
                         return true;
                 }
             }
-
-
-            // ******************************** méthodes ************************************
 
 
                         void Depot() // MÉTHODE POUR LES DÉPOTS
@@ -143,7 +140,7 @@ namespace Projet
 
                             else
                             {
-                                ChoixInvalide();
+                                Messages.ChoixInvalide();
                             }
 
                         }
@@ -166,8 +163,8 @@ namespace Projet
                     Console.Write("Veuillez saisir le montant: ");
                     montant = Convert.ToDouble(Console.ReadLine());
 
-                    if (montant > 1000) TropEleve(1000);
-                    else if (montant % 10 != 0) MauvaiseCoupure();
+                    if (montant > 1000) Messages.TropEleve(1000);
+                    else if (montant % 10 != 0) Messages.MauvaiseCoupure();
                     else if (montant <= guichet.GetChequeSolde())
                     {
                         guichet.RetraitCheque(montant);
@@ -176,7 +173,7 @@ namespace Projet
                         Console.WriteLine("\r\nAppuyez sur enter pour retourner");
                         Console.ReadLine();
                     }
-                    else FondsInsuffisants();
+                    else Messages.FondsInsuffisants();
 
                 }
 
@@ -187,8 +184,8 @@ namespace Projet
                     Console.Write("Veuillez saisir le montant: ");
                     montant = Convert.ToDouble(Console.ReadLine());
 
-                    if (montant > 1000) TropEleve(1000);
-                    else if (montant % 10 != 0) MauvaiseCoupure();
+                    if (montant > 1000) Messages.TropEleve(1000);
+                    else if (montant % 10 != 0) Messages.MauvaiseCoupure();
                     else if (montant <= guichet.GetEpargneSolde())
                     {
                         guichet.RetraitEpargne(montant);
@@ -197,12 +194,12 @@ namespace Projet
                         Console.WriteLine("\r\nAppuyez sur enter pour retourner");
                         Console.ReadLine();
                     }
-                    else FondsInsuffisants();
+                    else Messages.FondsInsuffisants();
                 }
 
                 else
                 {
-                    ChoixInvalide();
+                    Messages.ChoixInvalide();
                 }
             }
 
@@ -225,7 +222,7 @@ namespace Projet
                     Console.WriteLine("Balance du compte épargne : " + guichet.GetEpargneSolde());
                     Console.Write("\r\nVeuillez saisir le montant: ");
                     montant = Convert.ToDouble(Console.ReadLine());
-                    if (montant > 100000) TropEleve(100000);
+                    if (montant > 100000) Messages.TropEleve(100000);
                     else if (montant <= guichet.GetChequeSolde())
                     {
                         guichet.RetraitCheque(montant);
@@ -237,7 +234,7 @@ namespace Projet
                         Console.WriteLine("\r\nAppuyez sur enter pour retourner");
                         Console.ReadLine();
                     }
-                    else FondsInsuffisants();
+                    else Messages.FondsInsuffisants();
                 }
 
                 if (choix == "2")
@@ -248,7 +245,7 @@ namespace Projet
                     Console.WriteLine("Balance du compte chèque :  " + guichet.GetChequeSolde());
                     Console.Write("\r\nVeuillez saisir le montant: ");
                     montant = Convert.ToDouble(Console.ReadLine());
-                    if (montant > 100000) TropEleve(100000);
+                    if (montant > 100000) Messages.TropEleve(100000);
                     if (montant <= guichet.GetEpargneSolde())
                     {
                         guichet.RetraitEpargne(montant);
@@ -260,64 +257,8 @@ namespace Projet
                         Console.WriteLine("\r\nAppuyez sur enter pour retourner");
                         Console.ReadLine();
                     }
-                    else FondsInsuffisants();
+                    else Messages.FondsInsuffisants();
                 }
-            }
-
-            void AuRevoir()
-            {
-                Console.Clear();
-
-                Console.WriteLine("\r\n\r\nAppuyez sur enter pour terminer");
-                Console.ReadLine();
-            }
-
-            void ChoixInvalide()
-            {
-                Console.Clear();
-                Console.WriteLine("\r\n\r\nCe choix n'est pas disponible, veuillez recommencer");
-                Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                Console.ReadLine();
-            }
-
-            void FondsInsuffisants()
-            {
-                Console.Clear();
-                Console.WriteLine("\r\n\r\nFonds insuffisants !!");
-                Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                Console.ReadLine();
-            }
-
-            void TropEleve(int limite)
-            {
-                Console.Clear();
-                Console.WriteLine("\r\n\r\nVous ne pouvez dépasser la limite de " + limite + "$ pour cette transaction");
-                Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                Console.ReadLine();
-            }
-
-            void MauvaiseCoupure()
-            {
-                Console.Clear();
-                Console.WriteLine("\r\n\r\nLe montant du retrait doit être multiple de 10");
-                Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                Console.ReadLine();
-            }
-
-            void CompteManquant()
-            {
-                Console.Clear();
-                Console.WriteLine("\r\n\r\nVous devez détenir plus d'un compte pour effectuer un virement");
-                Console.WriteLine("\r\nAppuyez sur <<enter>> pour retourner");
-                Console.ReadLine();
-            }
-
-            void TropEssais()
-            {
-                Console.Clear();
-                Console.WriteLine("\r\n\r\nNous ne pouvons valider vos informations");
-                Console.WriteLine("\r\nVeuillez réessayer plus tard");
-                Console.WriteLine("\r\n\r\nAu revoir");
             }
 
         }

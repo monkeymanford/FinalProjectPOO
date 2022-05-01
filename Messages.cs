@@ -2,9 +2,9 @@ using System;
 
 namespace Projet
 {
-    public class Messages
+    public static class Messages
     {
-            public void AuRevoir()
+            public static void AuRevoir()
             {
                 Console.Clear();
 
@@ -12,7 +12,7 @@ namespace Projet
                 Console.ReadLine();
             }
 
-            public void ChoixInvalide()
+            public static void ChoixInvalide()
             {
                 Console.Clear();
                 Console.WriteLine("\r\n\r\nCe choix n'est pas disponible, veuillez recommencer");
@@ -20,7 +20,7 @@ namespace Projet
                 Console.ReadLine();
             }
 
-            public void FondsInsuffisants()
+            public static void FondsInsuffisants()
             {
                 Console.Clear();
                 Console.WriteLine("\r\n\r\nFonds insuffisants !!");
@@ -28,7 +28,7 @@ namespace Projet
                 Console.ReadLine();
             }
 
-            public void TropEleve(int limite)
+            public static void TropEleve(int limite)
             {
                 Console.Clear();
                 Console.WriteLine("\r\n\r\nVous ne pouvez dépasser la limite de " + limite + "$ pour cette transaction");
@@ -36,7 +36,7 @@ namespace Projet
                 Console.ReadLine();
             }
 
-            public void MauvaiseCoupure()
+            public static void MauvaiseCoupure()
             {
                 Console.Clear();
                 Console.WriteLine("\r\n\r\nLe montant du retrait doit être multiple de 10");
@@ -44,7 +44,7 @@ namespace Projet
                 Console.ReadLine();
             }
 
-            public void CompteManquant()
+            public static void CompteManquant()
             {
                 Console.Clear();
                 Console.WriteLine("\r\n\r\nVous devez détenir plus d'un compte pour effectuer un virement");
@@ -52,7 +52,7 @@ namespace Projet
                 Console.ReadLine();
             }
 
-            public void TropEssais()
+            public static void TropEssais()
             {
                 Console.Clear();
                 Console.WriteLine("\r\n\r\nNous ne pouvons valider vos informations");
