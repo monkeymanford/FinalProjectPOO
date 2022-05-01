@@ -10,6 +10,11 @@ namespace Projet
         private Epargne compteEpargne;
         private List<Client> listeClients;
 
+        public Guichet()
+        {
+
+        }
+
         public bool CheckCheque()
         {
             if (compteCheque != null) return true;
@@ -32,7 +37,7 @@ namespace Projet
             return compteCheque.getSolde();
         }
 
-        public Guichet(List<Client> listeClients)
+        public void SetListGuichet(List<Client> listeClients)
         {
             this.listeClients = listeClients;
         }
