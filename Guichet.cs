@@ -10,6 +10,16 @@ namespace Projet
         private Epargne compteEpargne;
         private List<Client> listeClients;
 
+        public double GetEpargneSolde() 
+        {
+            return compteEpargne.getSolde();
+        }
+
+        public double GetChequeSolde()
+        {
+            return compteCheque.getSolde();
+        }
+
         public Guichet(List<Client> listeClients)
         {
             this.listeClients = listeClients;
@@ -30,24 +40,24 @@ namespace Projet
             return true;
         }
 
-        public double RetraitCheque(double montant, int nip)
+        public double RetraitCheque(double montant)
         {
             return 0;
         }
 
-        public double RetraitEpargne(double montant, int nip)
+        public double RetraitEpargne(double montant)
         {
             return 0;
         }
 
-        public double DepotCheque(double montant, int nip)
+        public void DepotCheque(double montant)
         {
-            return 0;
+            compteCheque.Depot(montant);
         }
 
-        public double DepotEpargne(double montant, int nip)
+        public void DepotEpargne(double montant)
         {
-            return 0;
+            compteEpargne.Depot(montant);
         }
 
     }
