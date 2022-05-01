@@ -44,8 +44,7 @@ namespace Projet
             {
                 if (tentatives >= 3) // après trois tentative, le guichet rejète l'utilisateur
                 {
-                    Console.Clear();
-                    Console.WriteLine("\r\n\r\nNous ne pouvons valider vos informations, veuillez réessayez plus tard\r\n\r\nAu Revoir");
+                    TropEssais();
                     showMenu = false;
                     break;
                 }
@@ -105,50 +104,50 @@ namespace Projet
             // ******************************** méthodes ************************************
 
 
-            void Depot() // MÉTHODE POUR LES DÉPOTS
-            {
-                string choix;
+                        void Depot() // MÉTHODE POUR LES DÉPOTS
+                        {
+                            string choix;
 
-                Console.Clear();
-                Console.WriteLine("Un dépôt dans quel compte ?");
-                Console.WriteLine("1) Compte chèque");
-                Console.WriteLine("2) Compte épargne");
-                Console.Write("\r\nSelectionnez une option: ");
-                choix = Console.ReadLine();
+                            Console.Clear();
+                            Console.WriteLine("Un dépôt dans quel compte ?");
+                            Console.WriteLine("1) Compte chèque");
+                            Console.WriteLine("2) Compte épargne");
+                            Console.Write("\r\nSelectionnez une option: ");
+                            choix = Console.ReadLine();
 
-                if (choix == "1" && guichet.CheckCheque())
-                {
-                    Console.Clear();
-                    Console.WriteLine("Balance : " + guichet.GetChequeSolde());
-                    Console.Write("Veuillez saisir le montant: ");
-                    montant = Convert.ToDouble(Console.ReadLine());
-                    guichet.DepotCheque(montant);
-                    Console.Clear();
-                    Console.WriteLine("\r\nNouveau Solde : " + guichet.GetChequeSolde());
-                    Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                    Console.ReadLine();
-                }
+                            if (choix == "1" && guichet.CheckCheque())
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Balance : " + guichet.GetChequeSolde());
+                                Console.Write("Veuillez saisir le montant: ");
+                                montant = Convert.ToDouble(Console.ReadLine());
+                                guichet.DepotCheque(montant);
+                                Console.Clear();
+                                Console.WriteLine("\r\nNouveau Solde : " + guichet.GetChequeSolde());
+                                Console.WriteLine("\r\nAppuyez sur enter pour retourner");
+                                Console.ReadLine();
+                            }
 
-                else if (choix == "2" && guichet.CheckEpargne())
-                {
-                    Console.Clear();
-                    Console.WriteLine("Balance : " + guichet.GetEpargneSolde());
-                    Console.Write("Veuillez saisir le montant: ");
-                    montant = Convert.ToDouble(Console.ReadLine());
-                    guichet.DepotEpargne(montant);
-                    Console.Clear();
-                    Console.WriteLine("\r\nNouveau Solde : " + guichet.GetEpargneSolde());
-                    Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                    Console.ReadLine();
-                }
+                            else if (choix == "2" && guichet.CheckEpargne())
+                            {
+                                Console.Clear();
+                                Console.WriteLine("Balance : " + guichet.GetEpargneSolde());
+                                Console.Write("Veuillez saisir le montant: ");
+                                montant = Convert.ToDouble(Console.ReadLine());
+                                guichet.DepotEpargne(montant);
+                                Console.Clear();
+                                Console.WriteLine("\r\nNouveau Solde : " + guichet.GetEpargneSolde());
+                                Console.WriteLine("\r\nAppuyez sur enter pour retourner");
+                                Console.ReadLine();
+                            }
 
-                else
-                {
-                    ChoixInvalide();
-                }
+                            else
+                            {
+                                ChoixInvalide();
+                            }
 
-            }
-
+                        }
+            
             void Retrait() // MÉTHODE POUR LES RETRAITS
             {
                 string choix;
@@ -268,7 +267,7 @@ namespace Projet
             void AuRevoir()
             {
                 Console.Clear();
-            
+
                 Console.WriteLine("\r\n\r\nAppuyez sur enter pour terminer");
                 Console.ReadLine();
             }
@@ -311,6 +310,14 @@ namespace Projet
                 Console.WriteLine("\r\n\r\nVous devez détenir plus d'un compte pour effectuer un virement");
                 Console.WriteLine("\r\nAppuyez sur <<enter>> pour retourner");
                 Console.ReadLine();
+            }
+
+            void TropEssais()
+            {
+                Console.Clear();
+                Console.WriteLine("\r\n\r\nNous ne pouvons valider vos informations");
+                Console.WriteLine("\r\nVeuillez réessayer plus tard");
+                Console.WriteLine("\r\n\r\nAu revoir");
             }
 
         }
