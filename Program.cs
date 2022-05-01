@@ -17,17 +17,17 @@ namespace Projet
             Cheque cheque1 = new Cheque(1600, 110061);
             Epargne epargne1 = new Epargne(3200, 110062);
             client1.SetCompteCheque(cheque1);
+            client1.SetCompteEpargne(epargne1);
 
-
-/*             // client 2 détient seulement un compte chèque
+            // client 2 détient seulement un compte chèque
             Client client2 = new Client("Ezekiel", "Ciel", "ezeciel", "2345");
-            Compte cheque2 = new Cheque(41000, 120032);
+            Cheque cheque2 = new Cheque(41000, 120032);
             client2.SetCompteCheque(cheque2);
 
             // client 3 détient seulement un compte épargne
             Client client3 = new Client("Miriam", "Yang", "miyang", "3456");
-            Compte epargne3 = new Epargne(150, 110063);
-            client3.SetCompteEpargne(epargne3); */
+            Epargne epargne3 = new Epargne(150, 110063);
+            client3.SetCompteEpargne(epargne3);
 
             listeClients.Add(client1);
             //listeClients.Add(client2);
