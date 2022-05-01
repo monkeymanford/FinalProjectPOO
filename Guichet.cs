@@ -10,7 +10,19 @@ namespace Projet
         private Epargne compteEpargne;
         private List<Client> listeClients;
 
-        public double GetEpargneSolde() 
+        public bool CheckCheque()
+        {
+            if (compteCheque != null) return true;
+            else return false;
+        }
+
+        public bool CheckEpargne()
+        {
+            if (compteEpargne != null) return true;
+            else return false;
+        }
+
+        public double GetEpargneSolde()
         {
             return compteEpargne.getSolde();
         }
@@ -29,7 +41,7 @@ namespace Projet
         {
             foreach (Client x in listeClients)
             {
-                if (string.Equals(x.getUser(), user) && string.Equals(x.getNIP(), nip)) 
+                if (string.Equals(x.getUser(), user) && string.Equals(x.getNIP(), nip))
                 {
                     this.compteCheque = x.GetCompteCheque();
                     this.compteEpargne = x.GetCompteEpargne();
