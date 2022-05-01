@@ -4,6 +4,11 @@ namespace Projet
     {
         private const double tauxInteret = 1.25;
 
+        public Epargne()
+        {
+            
+        }
+
         public Epargne(int numeroCompte, double solde) : base(numeroCompte, solde)
         {
 

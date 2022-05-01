@@ -5,6 +5,11 @@ namespace Projet
         private int numeroCompte;
         private double soldeCompte;
 
+        public Compte()
+        {
+            
+        }
+
         public Compte(int numeroCompte, double soldeCompte)
         {
             this.numeroCompte = numeroCompte;

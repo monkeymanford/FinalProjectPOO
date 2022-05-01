@@ -12,8 +12,8 @@ namespace Projet
         // l'objet client contient de données pour les numéros de comptes si ces comptes sont disponibles
         // si le client ne détient pas ce type de compte, la valeur demeure null
 
-        private int numeroCompteEpargne;
-        private int numeroCompteCheque;
+        //private int numeroCompteEpargne;
+        //private int numeroCompteCheque;
 
         public Client(string prenom, string nom, string username, string numeroNIP)
         {
@@ -28,16 +28,24 @@ namespace Projet
         public string getUser() => username;
         public string getNIP() => numeroNIP;
 
-        public int NumeroCompteEpargne
+        public void SetCompteEpargne(Epargne compteEpargne)
         {
-            get => numeroCompteEpargne;
-            set { numeroCompteEpargne = value; }
+            this.compteEpargne = compteEpargne;
         }
 
-        public int NumeroCompteCheque
+        public void SetCompteCheque(Cheque compteCheque)
         {
-            get => numeroCompteCheque;
-            set { numeroCompteCheque = value; }
+            this.compteCheque = compteCheque;
+        }
+
+        public Epargne GetCompteEpargne()
+        {
+            return compteEpargne;
+        }
+
+        public Cheque GetCompteCheque()
+        {
+            return compteCheque;
         }
 
     }

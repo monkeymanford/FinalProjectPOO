@@ -6,8 +6,8 @@ namespace Projet
     public class Guichet
     {
         private Client client;
-        private Cheque compteCheque;
-        private Epargne compteEpargne;
+        private Compte compteCheque;
+        private Compte compteEpargne;
         private List<Client> listeClients;
 
         public Guichet(List<Client> listeClients)
@@ -21,8 +21,8 @@ namespace Projet
             {
                 if (string.Equals(x.getUser(), user) && string.Equals(x.getNIP(), nip)) 
                 {
-                    this.compteCheque = x.NumeroCompteCheque;
-                    this.compteEpargne = x.NumeroCompteEpargne;
+                    this.compteCheque = x.GetCompteCheque();
+                    this.compteEpargne = x.GetCompteEpargne();
                     return false;
                 }
             }

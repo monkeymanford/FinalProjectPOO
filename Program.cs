@@ -12,32 +12,26 @@ namespace Projet
         {
             List<Client> listeClients = new List<Client>();
 
-            // hard coded clients
-            // le client1 détient les deux types de comptes
-            // le client2 détient seulement un compte chèque
-            // le client3 détient seulement un compte épargne
-            // on peut ainsi tester toutes les possibilités
+            // client 1 avec un compte de chaque type
             Client client1 = new Client("Ghandi", "Lee", "glee", "1234");
+            Cheque cheque1 = new Cheque(1600, 110061);
+            Epargne epargne1 = new Epargne(3200, 110062);
+            client1.SetCompteCheque(cheque1);
+
+
+/*             // client 2 détient seulement un compte chèque
             Client client2 = new Client("Ezekiel", "Ciel", "ezeciel", "2345");
-            Client client3 = new Client("Miriam", "Yang", "miyang", "3456");
-
-            // comptes de client1 : (les comptes sont créés en polymorphisme)
-            Compte cheque1 = new Cheque(1600, 110061);
-            Compte epargne1 = new Epargne(3200, 110062);
-            client1.NumeroCompteCheque = cheque1.getNumCompte();
-            client1.NumeroCompteEpargne = epargne1.getNumCompte();
-
-            // compte de client2 :
             Compte cheque2 = new Cheque(41000, 120032);
-            client2.NumeroCompteCheque = cheque2.getNumCompte();
+            client2.SetCompteCheque(cheque2);
 
-            // compte de client3 :
+            // client 3 détient seulement un compte épargne
+            Client client3 = new Client("Miriam", "Yang", "miyang", "3456");
             Compte epargne3 = new Epargne(150, 110063);
-            client3.NumeroCompteEpargne = epargne3.getNumCompte();
+            client3.SetCompteEpargne(epargne3); */
 
             listeClients.Add(client1);
-            listeClients.Add(client2);
-            listeClients.Add(client3);
+            //listeClients.Add(client2);
+            //listeClients.Add(client3);
 
             Guichet guichet = new Guichet(listeClients);
 
@@ -89,14 +83,15 @@ namespace Projet
                         Console.WriteLine("1) Compte chèque");
                         Console.WriteLine("2) Compte épargne");
                         Console.Write("\r\nSelectionner une option: ");
-                        
-                        
-                        if (Console.ReadLine() == 1)
+
+
+                        /* if (Console.ReadLine() == 1)
                         {
                             Console.Clear();
                             Console.Write("Veuillez saisir le montant: ");
 
-                        }
+
+                        } */
 
 
                         return true;
