@@ -36,7 +36,7 @@ namespace Projet
             bool showMenu = true;
             bool validation = true;
             string saisieUser;
-            string saisieNIP;
+            string saisieNIP = "";
             int tentatives = 0;
             double montant;
 
@@ -45,7 +45,7 @@ namespace Projet
                 if (tentatives >= 3) // après trois tentative, le guichet rejète l'utilisateur
                 {
                     Console.Clear();
-                    Console.WriteLine("Nous ne pouvons valider vos informations, réessayez plus tard");
+                    Console.WriteLine("Nous ne pouvons valider vos informations, veuillez réessayez plus tard");
                     showMenu = false;
                     break;
                 }
@@ -53,7 +53,7 @@ namespace Projet
                 Console.Write("Veuillez entrer votre nom d'utilisateur: ");
                 saisieUser = Console.ReadLine();
                 Console.Write("\r\nVeuillez entrer votre NIP: ");
-                saisieNIP = Console.ReadLine();
+                saisieNIP = CachePasse();
                 validation = guichet.ValiderUtilisateur(saisieUser, saisieNIP);
                 tentatives++;
             }
@@ -286,7 +286,21 @@ namespace Projet
 
         }
 
- 
+        public static string CachePasse()
+        {
+            ConsoleKeyInfo key;
+            string code = "";
+            while (true)
+            {
+                key = Console.ReadKey(true);
+                if (Char.IsNumber(key.KeyChar))
+                {
+                    Console.Write("*");
+                    code += key.KeyChar;
+                }
+                else if (key.Key == ConsoleKey.Enter) return code;
+            }
+        }
 
 
 
