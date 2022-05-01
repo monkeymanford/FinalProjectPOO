@@ -28,7 +28,7 @@ namespace Projet
 
         public void Retrait(double montant)
         {
-
+            soldeCompte -= montant;
         }
 
 

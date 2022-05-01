@@ -40,14 +40,14 @@ namespace Projet
             return true;
         }
 
-        public double RetraitCheque(double montant)
+        public void RetraitCheque(double montant)
         {
-            return 0;
+            compteCheque.Retrait(montant);
         }
 
-        public double RetraitEpargne(double montant)
+        public void RetraitEpargne(double montant)
         {
-            return 0;
+            compteEpargne.Retrait(montant);
         }
 
         public void DepotCheque(double montant)

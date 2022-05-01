@@ -41,7 +41,6 @@ namespace Projet
             string saisieNIP;
             int tentatives = 0;
             double montant;
-            string choix;
 
             while (validation)
             {
@@ -61,10 +60,9 @@ namespace Projet
                 tentatives++;
             }
 
-            while (showMenu) // menu principal
+            while (showMenu) // menu loop
             {
                 showMenu = Menu();
-
             }
 
             bool Menu()
@@ -80,60 +78,19 @@ namespace Projet
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        Console.Clear();
-                        Console.WriteLine("Un dépôt dans quel compte ?");
-                        Console.WriteLine("1) Compte chèque");
-                        Console.WriteLine("2) Compte épargne");
-                        Console.Write("\r\nSelectionnez une option: ");
-                        choix = Console.ReadLine();
-
-                        if (choix == "1")
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Balance : " + guichet.GetChequeSolde());
-                            Console.Write("Veuillez saisir le montant: ");
-                            montant = Convert.ToDouble(Console.ReadLine());
-                            guichet.DepotCheque(montant);
-                            Console.Clear();
-                            Console.WriteLine("Nouveau Solde : " + guichet.GetChequeSolde());
-                            Console.WriteLine("\r\nAppuyez sur une touche pour retourner");
-                            Console.ReadLine();
-                        }
-
-                        if (choix == "2")
-                        {
-                            Console.Clear();
-                            Console.WriteLine("Balance : " + guichet.GetEpargneSolde());
-                            Console.Write("Veuillez saisir le montant: ");
-                            montant = Convert.ToDouble(Console.ReadLine());
-                            guichet.DepotEpargne(montant);
-                            Console.Clear();
-                            Console.WriteLine("Nouveau Solde : " + guichet.GetEpargneSolde());
-                            Console.WriteLine("\r\nAppuyez sur une touche pour retourner");
-                            Console.ReadLine();
-                        }
-
+                        Depot();
                         return true;
 
                     case "2":
-                        Console.Clear();
-                        Console.WriteLine("Un retrait dans quel compte ?");
-                        Console.WriteLine("1) Compte chèque");
-                        Console.WriteLine("2) Compte épargne");
-                        Console.Write("\r\nSelectionnez une option: ");
-                        Console.ReadLine();
+                        Retrait();
                         return true;
+
                     case "3":
-                        Console.Clear();
-                        Console.WriteLine("Un Virement de quel à quel compte ?");
-                        Console.WriteLine("1) De compte chèque vers compte épargne");
-                        Console.WriteLine("2) de compte épargne vers compte chèque");
-                        Console.Write("\r\nSelectionnez une option: ");
-                        Console.ReadLine();
+                        Virement();
                         return true;
                     case "4":
                         Console.Clear();
-                        Console.WriteLine("Merci d'avoir utilisé le service ToutCrocheInc.");
+
                         Console.WriteLine("Appuyez sur une touche pour terminer");
                         Console.ReadLine();
                         return false;
@@ -141,6 +98,136 @@ namespace Projet
                         return true;
                 }
             }
+
+
+            // ******************************** méthodes ************************************
+
+
+            void Depot() // MÉTHODE POUR LES DÉPOTS
+            {
+                string choix;
+
+                Console.Clear();
+                Console.WriteLine("Un dépôt dans quel compte ?");
+                Console.WriteLine("1) Compte chèque");
+                Console.WriteLine("2) Compte épargne");
+                Console.Write("\r\nSelectionnez une option: ");
+                choix = Console.ReadLine();
+
+                if (choix == "1")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Balance : " + guichet.GetChequeSolde());
+                    Console.Write("Veuillez saisir le montant: ");
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    guichet.DepotCheque(montant);
+                    Console.Clear();
+                    Console.WriteLine("Nouveau Solde : " + guichet.GetChequeSolde());
+                    Console.WriteLine("\r\nAppuyez sur une touche pour retourner");
+                    Console.ReadLine();
+                }
+
+                if (choix == "2")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Balance : " + guichet.GetEpargneSolde());
+                    Console.Write("Veuillez saisir le montant: ");
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    guichet.DepotEpargne(montant);
+                    Console.Clear();
+                    Console.WriteLine("Nouveau Solde : " + guichet.GetEpargneSolde());
+                    Console.WriteLine("\r\nAppuyez sur une touche pour retourner");
+                    Console.ReadLine();
+                }
+
+            }
+
+            void Retrait() // MÉTHODE POUR LES RETRAITS
+            {
+                string choix;
+
+                Console.Clear();
+                Console.WriteLine("Un retrait dans quel compte ?");
+                Console.WriteLine("1) Compte chèque");
+                Console.WriteLine("2) Compte épargne");
+                Console.Write("\r\nSelectionnez une option: ");
+                choix = Console.ReadLine();
+
+                if (choix == "1")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Balance : " + guichet.GetChequeSolde());
+                    Console.Write("Veuillez saisir le montant: ");
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    guichet.RetraitCheque(montant);
+                    Console.Clear();
+                    Console.WriteLine("Nouveau Solde : " + guichet.GetChequeSolde());
+                    Console.WriteLine("\r\nAppuyez sur une touche pour retourner");
+                    Console.ReadLine();
+                }
+
+                if (choix == "2")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Balance : " + guichet.GetEpargneSolde());
+                    Console.Write("Veuillez saisir le montant: ");
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    guichet.RetraitEpargne(montant);
+                    Console.Clear();
+                    Console.WriteLine("Nouveau Solde : " + guichet.GetEpargneSolde());
+                    Console.WriteLine("\r\nAppuyez sur une touche pour retourner");
+                    Console.ReadLine();
+                }
+            }
+
+            void Virement() // MÉTHODE POUR LES VIREMENTS
+            {
+                string choix;
+
+                Console.Clear();
+                Console.WriteLine("Un Virement de quel à quel compte ?\r\n");
+                Console.WriteLine("1) Du compte chèque vers le compte épargne");
+                Console.WriteLine("2) Du compte épargne vers le compte chèque");
+                Console.Write("\r\nSelectionnez une option: ");
+                choix = Console.ReadLine();
+
+                if (choix == "1")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Balance du compte chèque :  " + guichet.GetChequeSolde());
+
+                    Console.WriteLine("Balance du compte épargne : " + guichet.GetEpargneSolde());
+                    Console.Write("\r\nVeuillez saisir le montant: ");
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    guichet.RetraitCheque(montant);
+                    guichet.DepotEpargne(montant);
+                    Console.Clear();
+                    Console.WriteLine("Le virement a été effectué");
+                    Console.WriteLine("Nouveau solde du compte chèque :  " + guichet.GetChequeSolde());
+                    Console.WriteLine("Nouveau solde du compte épargne : " + guichet.GetEpargneSolde());
+                    Console.WriteLine("\r\nAppuyez sur une touche pour retourner");
+                    Console.ReadLine();
+                }
+
+                if (choix == "2")
+                {
+                    Console.Clear();
+                    Console.WriteLine("Balance du compte épargne : " + guichet.GetEpargneSolde());
+
+                    Console.WriteLine("Balance du compte chèque :  " + guichet.GetChequeSolde());
+                    Console.Write("\r\nVeuillez saisir le montant: ");
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    guichet.RetraitEpargne(montant);
+                    guichet.DepotCheque(montant);
+                    Console.Clear();
+                    Console.WriteLine("Le virement a été effectué\r\n");
+                    Console.WriteLine("Nouveau solde du compte épargne : " + guichet.GetEpargneSolde());
+                    Console.WriteLine("Nouveau solde du compte chèque :  " + guichet.GetChequeSolde());
+                    Console.WriteLine("\r\nAppuyez sur une touche pour retourner");
+                    Console.ReadLine();
+                }
+            }
+
         }
 
 
