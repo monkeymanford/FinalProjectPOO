@@ -16,7 +16,7 @@ namespace Projet
 
         public void PaiementInterets()
         {
-
+            setSolde(getSolde() * tauxInteret);
         }
 
 

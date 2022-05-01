@@ -1,3 +1,5 @@
+using System;
+
 namespace Projet
 {
     public class Compte
@@ -7,7 +9,7 @@ namespace Projet
 
         public Compte()
         {
-            
+
         }
 
         public Compte(int numeroCompte, double soldeCompte)
@@ -19,7 +21,11 @@ namespace Projet
         // getters & setters
 
         public double getNumCompte() => numeroCompte;
-        public double getSolde() => soldeCompte;
+        public double getSolde() 
+        {
+            return Math.Round(soldeCompte, 2, MidpointRounding.AwayFromZero);
+        }
+        public void setSolde(double soldeCompte) { this.soldeCompte = soldeCompte; }
 
         public void Depot(double montant)
         {

@@ -21,6 +21,8 @@ namespace Projet
 
         public string getUser() => username;
         public string getNIP() => numeroNIP;
+        public string getNom() => nom;
+        public string getPrenom() => prenom;
 
         public void SetCompteEpargne(Epargne compteEpargne)
         {
@@ -41,6 +43,8 @@ namespace Projet
         {
             return compteCheque;
         }
+
+
 
     }
 }

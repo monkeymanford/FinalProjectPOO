@@ -6,12 +6,13 @@ namespace Projet
     class Program
     {
         static double montant;
+        static string choix;
         static Guichet guichet = new Guichet();
+        static bool isAdmin = true;
+        static List<Client> listeClients = new List<Client>();
 
         static void Main(string[] args)
         {
-            List<Client> listeClients = new List<Client>();
-
             // ************************ HARD CODED INFOS ******************************************
 
             // J'ai hardcodé trois clients pour chaque variation possible, 
@@ -26,12 +27,12 @@ namespace Projet
             client1.SetCompteEpargne(epargne1);
 
             // client 2 détient seulement un compte chèque
-            Client client2 = new Client("Ezekiel", "Ciel", "ezeciel", "2345");
+            Client client2 = new Client("Ezekiel", "Ciel", "ezee", "2345");
             Cheque cheque2 = new Cheque(120032, 41000);
             client2.SetCompteCheque(cheque2);
 
             // client 3 détient seulement un compte épargne
-            Client client3 = new Client("Miriam", "Yang", "miyang", "3456");
+            Client client3 = new Client("Miriam", "Yang", "miya", "3456");
             Epargne epargne3 = new Epargne(110063, 150);
             client3.SetCompteEpargne(epargne3);
 
@@ -48,8 +49,8 @@ namespace Projet
             int tentatives = 0;
 
             while (validation)
-            {
-                if (tentatives >= 3) // après trois tentative, le guichet rejète l'utilisateur
+            {               // après trois tentative, le guichet rejète l'utilisateur
+                if (tentatives >= 3)
                 {
                     Messages.TropEssais();
                     showMenu = false;
@@ -60,24 +61,25 @@ namespace Projet
                 tentatives++;
             }
 
-            while (showMenu) // menu loop
+            while (!(isAdmin))
+            {
+                showMenu = false;
+                isAdmin = !ConsoleAdministrateur();
+            }
+
+            while (showMenu) // loop de menu
             {
                 showMenu = MenuTransactions();
             }
 
         }
 
+
         // ******************* MENU DE TRANSACTIONS *********************
 
         static bool MenuTransactions()
         {
-            Console.Clear();
-            Console.WriteLine("Choisissez une option,");
-            Console.WriteLine("1) Dépôt");
-            Console.WriteLine("2) Retrait");
-            Console.WriteLine("3) Virement");
-            Console.WriteLine("4) Quitter");
-            Console.Write("\r\nVotre sélection: ");
+            Messages.MenuPrincipal();
 
             switch (Console.ReadLine())
             {
@@ -109,18 +111,12 @@ namespace Projet
 
         static void Depot()
         {
-            string choix;
-
-            Console.Clear();
-            Console.WriteLine("Un dépôt dans quel compte ?");
-            Console.WriteLine("1) Compte chèque");
-            Console.WriteLine("2) Compte épargne");
-            Console.Write("\r\nSelectionnez une option: ");
+            Messages.MenuDepot();
             choix = Console.ReadLine();
+            Console.Clear();
 
             if (choix == "1" && guichet.CheckCheque())
             {
-                Console.Clear();
                 Console.WriteLine("Balance : " + guichet.GetChequeSolde());
                 Console.Write("Veuillez saisir le montant: ");
                 montant = Convert.ToDouble(Console.ReadLine());
@@ -133,7 +129,6 @@ namespace Projet
 
             else if (choix == "2" && guichet.CheckEpargne())
             {
-                Console.Clear();
                 Console.WriteLine("Balance : " + guichet.GetEpargneSolde());
                 Console.Write("Veuillez saisir le montant: ");
                 montant = Convert.ToDouble(Console.ReadLine());
@@ -155,18 +150,12 @@ namespace Projet
 
         public static void Retrait()
         {
-            string choix;
-
-            Console.Clear();
-            Console.WriteLine("Un retrait dans quel compte ?");
-            Console.WriteLine("1) Compte chèque");
-            Console.WriteLine("2) Compte épargne");
-            Console.Write("\r\nSélectionnez une option: ");
+            Messages.MenuRetrait();
             choix = Console.ReadLine();
+            Console.Clear();
 
             if (choix == "1" && guichet.CheckCheque())
             {
-                Console.Clear();
                 Console.WriteLine("Balance : " + guichet.GetChequeSolde());
                 Console.Write("Veuillez saisir le montant: ");
                 montant = Convert.ToDouble(Console.ReadLine());
@@ -187,7 +176,6 @@ namespace Projet
 
             else if (choix == "2" && guichet.CheckEpargne())
             {
-                Console.Clear();
                 Console.WriteLine("Balance : " + guichet.GetEpargneSolde());
                 Console.Write("Veuillez saisir le montant: ");
                 montant = Convert.ToDouble(Console.ReadLine());
@@ -215,20 +203,14 @@ namespace Projet
 
         public static void Virement()
         {
-            string choix;
-
-            Console.Clear();
-            Console.WriteLine("Un Virement de quel à quel compte ?\r\n");
-            Console.WriteLine("1) Du compte chèque vers le compte épargne");
-            Console.WriteLine("2) Du compte épargne vers le compte chèque");
-            Console.Write("\r\nSelectionnez une option: ");
+            Messages.MenuVirement();
             choix = Console.ReadLine();
+            Console.Clear();
 
             if (choix == "1")
             {
-                Console.Clear();
                 Console.WriteLine("Balance du compte chèque :  " + guichet.GetChequeSolde());
-
+                Console.WriteLine("   ↓   ↓   ↓   ↓   ↓   ");
                 Console.WriteLine("Balance du compte épargne : " + guichet.GetEpargneSolde());
                 Console.Write("\r\nVeuillez saisir le montant: ");
                 montant = Convert.ToDouble(Console.ReadLine());
@@ -249,9 +231,8 @@ namespace Projet
 
             if (choix == "2")
             {
-                Console.Clear();
                 Console.WriteLine("Balance du compte épargne : " + guichet.GetEpargneSolde());
-
+                Console.WriteLine("   ↓   ↓   ↓   ↓   ↓   ");
                 Console.WriteLine("Balance du compte chèque :  " + guichet.GetChequeSolde());
                 Console.Write("\r\nVeuillez saisir le montant: ");
                 montant = Convert.ToDouble(Console.ReadLine());
@@ -284,8 +265,74 @@ namespace Projet
 
             Console.Write("\r\nVeuillez entrer votre NIP: ");
             saisieNIP = Security.CachePasse();
-            return guichet.ValiderUtilisateur(saisieUser, saisieNIP);
+
+            if (string.Equals("admin", saisieUser) && string.Equals("9999", saisieNIP))
+                return isAdmin = false;
+
+            else return guichet.ValiderUtilisateur(saisieUser, saisieNIP);
+
         }
+
+        // ******************* MENU POUR ADMINISTRATEUR *********************
+
+        public static bool ConsoleAdministrateur()
+        {
+            Messages.MenuAdmin();
+
+            switch (Console.ReadLine())
+            {
+                case "1":
+                    PaiementInterets();
+                    return true;
+                case "2":
+                    GenerationRapports();
+                    return true;
+                case "3":
+                    Messages.AuRevoir();
+                    return false;
+                default:
+                    return true;
+            }
+        }
+
+        public static void PaiementInterets()
+        {
+            foreach (Client x in listeClients)
+                if (x.GetCompteEpargne() != null) x.GetCompteEpargne().PaiementInterets();
+            Messages.PaiementInteretsEffectue();
+        }
+
+        public static void GenerationRapports()
+        {
+            Console.Clear();
+            Console.WriteLine("-----------------------------------------------------------------------------");
+            Console.WriteLine("{0,-12}{1,-15}{2,-15}{3,-15}{4,16}{5,4}", "| No.:", "Type:", "User:", "Nom:", "Solde:", "|");
+            Console.WriteLine("-----------------------------------------------------------------------------");
+            foreach (Client x in listeClients)
+            {
+                if (x.GetCompteEpargne() != null)
+                {
+                    Console.WriteLine("{0,-12}{1,-15}{2,-15}{3,-15}{4,15}{5,5}",
+                        "| "+x.GetCompteEpargne().getNumCompte(), "Epargne", x.getUser(),
+                        x.getNom()+", "+x.getPrenom(), x.GetCompteEpargne().getSolde(), "|");
+                }
+                if (x.GetCompteCheque() != null)
+                {
+                    Console.WriteLine("{0,-12}{1,-15}{2,-15}{3,-15}{4,15}{5,5}",
+                        "| "+x.GetCompteCheque().getNumCompte(), "Cheque", x.getUser(),
+                        x.getNom()+", "+x.getPrenom(), x.GetCompteCheque().getSolde(), "|");
+                }
+            }
+            Console.WriteLine("-----------------------------------------------------------------------------");
+            Console.ReadLine();
+        }
+
+
+
+
+
+
+
 
     }
 }

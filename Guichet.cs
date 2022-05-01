@@ -15,17 +15,7 @@ namespace Projet
 
         }
 
-        public bool CheckCheque()
-        {
-            if (compteCheque != null) return true;
-            else return false;
-        }
-
-        public bool CheckEpargne()
-        {
-            if (compteEpargne != null) return true;
-            else return false;
-        }
+        // GETTERS POUR SOLDES :
 
         public double GetEpargneSolde()
         {
@@ -36,6 +26,8 @@ namespace Projet
         {
             return compteCheque.getSolde();
         }
+
+        // SETTER POUR LA LISTE DE CLIENTS :
 
         public void SetListGuichet(List<Client> listeClients)
         {
@@ -56,6 +48,22 @@ namespace Projet
             }
             return true;
         }
+
+        // BOOL CHECK POUR TYPE DE COMPTE DISPONIBLE POUR LE CLIENT
+
+        public bool CheckCheque()
+        {
+            if (compteCheque != null) return true;
+            else return false;
+        }
+
+        public bool CheckEpargne()
+        {
+            if (compteEpargne != null) return true;
+            else return false;
+        }
+
+        // MÉTHODES POUR DÉPÔTS ET RETRAITS :
 
         public void RetraitCheque(double montant)
         {
