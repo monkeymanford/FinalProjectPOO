@@ -4,6 +4,24 @@ namespace Projet
 {
     public static class Messages
     {
+        // cette classe contient différents types de messages utilisés
+        // à travers l'application pour alléger le code du main
+
+        public static void Bonjour(string nom)
+        {
+            Console.Clear();
+            Console.Write("\r\nBonjour " + nom + ". ");
+            Console.ReadLine();
+        }
+
+        public static void Bienvenue()
+        {
+            Console.Clear();
+            Console.WriteLine("\r\nBienvenue au guichet automatique");
+            Console.Write("\r\n\r\nAppuyez sur enter pour commencer");
+            Console.ReadLine();
+        }
+
         public static void MenuAdmin()
         {
             Console.Clear();
@@ -112,7 +130,7 @@ namespace Projet
         {
             Console.Clear();
             Console.WriteLine("\r\n\r\nVous devez détenir plus d'un compte pour effectuer un virement");
-            Console.Write("\r\nAppuyez sur <<enter>> pour retourner");
+            Console.Write("\r\nAppuyez sur enter pour retourner");
             Console.ReadLine();
         }
 

@@ -21,11 +21,15 @@ namespace Projet
         // getters & setters
 
         public double getNumCompte() => numeroCompte;
+
         public double getSolde() 
         {
             return Math.Round(soldeCompte, 2, MidpointRounding.AwayFromZero);
         }
+
         public void setSolde(double soldeCompte) { this.soldeCompte = soldeCompte; }
+
+        // méthodes pour manipuler les soldes
 
         public void Depot(double montant)
         {

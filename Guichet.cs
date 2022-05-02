@@ -27,12 +27,21 @@ namespace Projet
             return compteCheque.getSolde();
         }
 
-        // SETTER POUR LA LISTE DE CLIENTS :
+        // getter pour le nom complet
+
+        public string GetPrenom()
+        {
+            return client.getPrenom() + " " + client.getNom();
+        }
+
+        // setter pour la liste de client
 
         public void SetListGuichet(List<Client> listeClients)
         {
             this.listeClients = listeClients;
         }
+
+        // méthode pour valider le user and nip
 
         public bool ValiderUtilisateur(string user, string nip)
         {
@@ -49,7 +58,7 @@ namespace Projet
             return true;
         }
 
-        // BOOL CHECK POUR TYPE DE COMPTE DISPONIBLE POUR LE CLIENT
+        // bool check pour vérifier si un client détient un type de compte
 
         public bool CheckCheque()
         {
@@ -63,7 +72,7 @@ namespace Projet
             else return false;
         }
 
-        // MÉTHODES POUR DÉPÔTS ET RETRAITS :
+        // appels des méthodes pour dépôts et retraits
 
         public void RetraitCheque(double montant)
         {
