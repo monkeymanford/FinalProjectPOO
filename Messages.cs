@@ -18,7 +18,7 @@ namespace Projet
         {
             Console.Clear();
             Console.WriteLine("\r\nLe paiement des intérêts a été effectué");
-            Console.WriteLine("\r\n\r\nAppuyez sur enter pour retourner");
+            Console.Write("\r\n\r\nAppuyez sur enter pour retourner");
             Console.ReadLine();
         }
 
@@ -64,7 +64,7 @@ namespace Projet
         {
             Console.Clear();
             Console.WriteLine("\r\nMerci d'avoir utilisé le service ToutCrocheInc.");
-            Console.WriteLine("\r\n\r\nAppuyez sur enter pour terminer");
+            Console.Write("\r\n\r\nAppuyez sur enter pour terminer");
             Console.ReadLine();
         }
 
@@ -72,7 +72,15 @@ namespace Projet
         {
             Console.Clear();
             Console.WriteLine("\r\n\r\nCe choix n'est pas disponible, veuillez recommencer");
-            Console.WriteLine("\r\nAppuyez sur enter pour retourner");
+            Console.Write("\r\nAppuyez sur enter pour retourner");
+            Console.ReadLine();
+        }
+
+        public static void MontantInvalide()
+        {
+            Console.Clear();
+            Console.WriteLine("\r\n\r\nLe montant doit être positif, veuillez recommencer");
+            Console.Write("\r\nAppuyez sur enter pour retourner");
             Console.ReadLine();
         }
 
@@ -80,7 +88,7 @@ namespace Projet
         {
             Console.Clear();
             Console.WriteLine("\r\n\r\nFonds insuffisants !!");
-            Console.WriteLine("\r\nAppuyez sur enter pour retourner");
+            Console.Write("\r\nAppuyez sur enter pour retourner");
             Console.ReadLine();
         }
 
@@ -88,7 +96,7 @@ namespace Projet
         {
             Console.Clear();
             Console.WriteLine("\r\n\r\nVous ne pouvez dépasser la limite de " + limite + "$ pour cette transaction");
-            Console.WriteLine("\r\nAppuyez sur enter pour retourner");
+            Console.Write("\r\nAppuyez sur enter pour retourner");
             Console.ReadLine();
         }
 
@@ -96,7 +104,7 @@ namespace Projet
         {
             Console.Clear();
             Console.WriteLine("\r\n\r\nLe montant du retrait doit être multiple de 10");
-            Console.WriteLine("\r\nAppuyez sur enter pour retourner");
+            Console.Write("\r\nAppuyez sur enter pour retourner");
             Console.ReadLine();
         }
 
@@ -104,7 +112,7 @@ namespace Projet
         {
             Console.Clear();
             Console.WriteLine("\r\n\r\nVous devez détenir plus d'un compte pour effectuer un virement");
-            Console.WriteLine("\r\nAppuyez sur <<enter>> pour retourner");
+            Console.Write("\r\nAppuyez sur <<enter>> pour retourner");
             Console.ReadLine();
         }
 
@@ -112,7 +120,16 @@ namespace Projet
         {
             Console.Clear();
             Console.WriteLine("\r\n\r\nNous ne pouvons valider vos informations");
-            Console.WriteLine("\r\nVeuillez réessayer plus tard");
+            Console.Write("\r\nVeuillez réessayer plus tard");
+            Console.ReadLine();
+        }
+
+        public static void Erreur()
+        {
+            Console.Clear();
+            Console.WriteLine("\r\n\r\nErreur !!");
+            Console.Write("\r\nVeuillez recommencer");
+            Console.ReadLine();
         }
     }
 }

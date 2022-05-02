@@ -36,11 +36,11 @@ namespace Projet
             Epargne epargne3 = new Epargne(110063, 150);
             client3.SetCompteEpargne(epargne3);
 
-            // *************************************************************************************
-
             listeClients.Add(client1);
             listeClients.Add(client2);
             listeClients.Add(client3);
+
+            // *************************************************************************************
 
             guichet.SetListGuichet(listeClients);
 
@@ -119,24 +119,40 @@ namespace Projet
             {
                 Console.WriteLine("Balance : " + guichet.GetChequeSolde());
                 Console.Write("Veuillez saisir le montant: ");
-                montant = Convert.ToDouble(Console.ReadLine());
-                guichet.DepotCheque(montant);
-                Console.Clear();
-                Console.WriteLine("\r\nNouveau Solde : " + guichet.GetChequeSolde());
-                Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                Console.ReadLine();
+                try
+                {
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    if (montant > 0)
+                    {
+                        guichet.DepotCheque(montant);
+                        Console.Clear();
+                        Console.WriteLine("\r\nNouveau Solde : " + guichet.GetChequeSolde());
+                        Console.Write("\r\nAppuyez sur enter pour retourner");
+                        Console.ReadLine();
+                    }
+                    else Messages.MontantInvalide();
+                }
+                catch (Exception) { Messages.Erreur(); }
             }
 
             else if (choix == "2" && guichet.CheckEpargne())
             {
                 Console.WriteLine("Balance : " + guichet.GetEpargneSolde());
                 Console.Write("Veuillez saisir le montant: ");
-                montant = Convert.ToDouble(Console.ReadLine());
-                guichet.DepotEpargne(montant);
-                Console.Clear();
-                Console.WriteLine("\r\nNouveau Solde : " + guichet.GetEpargneSolde());
-                Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                Console.ReadLine();
+                try
+                {
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    if (montant > 0)
+                    {
+                        guichet.DepotEpargne(montant);
+                        Console.Clear();
+                        Console.WriteLine("\r\nNouveau Solde : " + guichet.GetEpargneSolde());
+                        Console.Write("\r\nAppuyez sur enter pour retourner");
+                        Console.ReadLine();
+                    }
+                    else Messages.MontantInvalide();
+                }
+                catch (Exception) { Messages.Erreur(); }
             }
 
             else
@@ -158,19 +174,23 @@ namespace Projet
             {
                 Console.WriteLine("Balance : " + guichet.GetChequeSolde());
                 Console.Write("Veuillez saisir le montant: ");
-                montant = Convert.ToDouble(Console.ReadLine());
-
-                if (montant > 1000) Messages.TropEleve(1000);
-                else if (montant % 10 != 0) Messages.MauvaiseCoupure();
-                else if (montant <= guichet.GetChequeSolde())
+                try
                 {
-                    guichet.RetraitCheque(montant);
-                    Console.Clear();
-                    Console.WriteLine("\r\nNouveau Solde : " + guichet.GetChequeSolde());
-                    Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                    Console.ReadLine();
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    if (montant > 1000) Messages.TropEleve(1000);
+                    else if (montant <= 0) Messages.MontantInvalide();
+                    else if (montant % 10 != 0) Messages.MauvaiseCoupure();
+                    else if (montant <= guichet.GetChequeSolde())
+                    {
+                        guichet.RetraitCheque(montant);
+                        Console.Clear();
+                        Console.WriteLine("\r\nNouveau Solde : " + guichet.GetChequeSolde());
+                        Console.Write("\r\nAppuyez sur enter pour retourner");
+                        Console.ReadLine();
+                    }
+                    else Messages.FondsInsuffisants();
                 }
-                else Messages.FondsInsuffisants();
+                catch (Exception) { Messages.Erreur(); }
 
             }
 
@@ -178,19 +198,23 @@ namespace Projet
             {
                 Console.WriteLine("Balance : " + guichet.GetEpargneSolde());
                 Console.Write("Veuillez saisir le montant: ");
-                montant = Convert.ToDouble(Console.ReadLine());
-
-                if (montant > 1000) Messages.TropEleve(1000);
-                else if (montant % 10 != 0) Messages.MauvaiseCoupure();
-                else if (montant <= guichet.GetEpargneSolde())
+                try
                 {
-                    guichet.RetraitEpargne(montant);
-                    Console.Clear();
-                    Console.WriteLine("\r\nNouveau Solde : " + guichet.GetEpargneSolde());
-                    Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                    Console.ReadLine();
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    if (montant > 1000) Messages.TropEleve(1000);
+                    else if (montant <= 0) Messages.MontantInvalide();
+                    else if (montant % 10 != 0) Messages.MauvaiseCoupure();
+                    else if (montant <= guichet.GetEpargneSolde())
+                    {
+                        guichet.RetraitEpargne(montant);
+                        Console.Clear();
+                        Console.WriteLine("\r\nNouveau Solde : " + guichet.GetEpargneSolde());
+                        Console.Write("\r\nAppuyez sur enter pour retourner");
+                        Console.ReadLine();
+                    }
+                    else Messages.FondsInsuffisants();
                 }
-                else Messages.FondsInsuffisants();
+                catch (Exception) { Messages.Erreur(); }
             }
 
             else
@@ -213,42 +237,57 @@ namespace Projet
                 Console.WriteLine("   ↓   ↓   ↓   ↓   ↓   ");
                 Console.WriteLine("Balance du compte épargne : " + guichet.GetEpargneSolde());
                 Console.Write("\r\nVeuillez saisir le montant: ");
-                montant = Convert.ToDouble(Console.ReadLine());
-                if (montant > 100000) Messages.TropEleve(100000);
-                else if (montant <= guichet.GetChequeSolde())
+                try
                 {
-                    guichet.RetraitCheque(montant);
-                    guichet.DepotEpargne(montant);
-                    Console.Clear();
-                    Console.WriteLine("Le virement a été effectué\r\n");
-                    Console.WriteLine("Nouveau solde du compte chèque :  " + guichet.GetChequeSolde());
-                    Console.WriteLine("Nouveau solde du compte épargne : " + guichet.GetEpargneSolde());
-                    Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                    Console.ReadLine();
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    if (montant > 100000) Messages.TropEleve(100000);
+                    else if (montant <= 0) Messages.MontantInvalide();
+                    else if (montant <= guichet.GetChequeSolde())
+                    {
+                        guichet.RetraitCheque(montant);
+                        guichet.DepotEpargne(montant);
+                        Console.Clear();
+                        Console.WriteLine("Le virement a été effectué avec succès\r\n");
+                        Console.WriteLine("Nouveau solde du compte chèque :  " + guichet.GetChequeSolde());
+                        Console.WriteLine("Nouveau solde du compte épargne : " + guichet.GetEpargneSolde());
+                        Console.Write("\r\nAppuyez sur enter pour retourner");
+                        Console.ReadLine();
+                    }
+                    else Messages.FondsInsuffisants();
                 }
-                else Messages.FondsInsuffisants();
+                catch (Exception) { Messages.Erreur(); }
             }
 
-            if (choix == "2")
+            else if (choix == "2")
             {
                 Console.WriteLine("Balance du compte épargne : " + guichet.GetEpargneSolde());
                 Console.WriteLine("   ↓   ↓   ↓   ↓   ↓   ");
                 Console.WriteLine("Balance du compte chèque :  " + guichet.GetChequeSolde());
                 Console.Write("\r\nVeuillez saisir le montant: ");
-                montant = Convert.ToDouble(Console.ReadLine());
-                if (montant > 100000) Messages.TropEleve(100000);
-                if (montant <= guichet.GetEpargneSolde())
+                try
                 {
-                    guichet.RetraitEpargne(montant);
-                    guichet.DepotCheque(montant);
-                    Console.Clear();
-                    Console.WriteLine("Le virement a été effectué\r\n");
-                    Console.WriteLine("Nouveau solde du compte épargne : " + guichet.GetEpargneSolde());
-                    Console.WriteLine("Nouveau solde du compte chèque :  " + guichet.GetChequeSolde());
-                    Console.WriteLine("\r\nAppuyez sur enter pour retourner");
-                    Console.ReadLine();
+                    montant = Convert.ToDouble(Console.ReadLine());
+                    if (montant > 100000) Messages.TropEleve(100000);
+                    else if (montant <= 0) Messages.MontantInvalide();
+                    else if (montant <= guichet.GetEpargneSolde())
+                    {
+                        guichet.RetraitEpargne(montant);
+                        guichet.DepotCheque(montant);
+                        Console.Clear();
+                        Console.WriteLine("Le virement a été effectué avec succès\r\n");
+                        Console.WriteLine("Nouveau solde du compte épargne : " + guichet.GetEpargneSolde());
+                        Console.WriteLine("Nouveau solde du compte chèque :  " + guichet.GetChequeSolde());
+                        Console.Write("\r\nAppuyez sur enter pour retourner");
+                        Console.ReadLine();
+                    }
+                    else Messages.FondsInsuffisants();
                 }
-                else Messages.FondsInsuffisants();
+                catch (Exception) { Messages.Erreur(); }
+            }
+
+            else
+            {
+                Messages.ChoixInvalide();
             }
         }
 
@@ -273,7 +312,7 @@ namespace Projet
 
         }
 
-        // ******************* MENU POUR ADMINISTRATEUR *********************
+        // ******************* MENU POUR ADMINISTRATEUR ET MÉTHODES *********************
 
         public static bool ConsoleAdministrateur()
         {
@@ -291,6 +330,7 @@ namespace Projet
                     Messages.AuRevoir();
                     return false;
                 default:
+                    Messages.ChoixInvalide();
                     return true;
             }
         }
@@ -313,19 +353,20 @@ namespace Projet
                 if (x.GetCompteEpargne() != null)
                 {
                     Console.WriteLine("{0,-12}{1,-15}{2,-15}{3,-15}{4,15}{5,5}",
-                        "| "+x.GetCompteEpargne().getNumCompte(), "Epargne", x.getUser(),
-                        x.getNom()+", "+x.getPrenom(), x.GetCompteEpargne().getSolde(), "|");
+                        "| " + x.GetCompteEpargne().getNumCompte(), "Epargne", x.getUser(),
+                        x.getNom() + ", " + x.getPrenom(), x.GetCompteEpargne().getSolde(), "|");
                 }
                 if (x.GetCompteCheque() != null)
                 {
                     Console.WriteLine("{0,-12}{1,-15}{2,-15}{3,-15}{4,15}{5,5}",
-                        "| "+x.GetCompteCheque().getNumCompte(), "Cheque", x.getUser(),
-                        x.getNom()+", "+x.getPrenom(), x.GetCompteCheque().getSolde(), "|");
+                        "| " + x.GetCompteCheque().getNumCompte(), "Cheque", x.getUser(),
+                        x.getNom() + ", " + x.getPrenom(), x.GetCompteCheque().getSolde(), "|");
                 }
             }
-            Console.WriteLine("-----------------------------------------------------------------------------");
+            Console.Write("-----------------------------------------------------------------------------");
             Console.ReadLine();
         }
+
 
 
 
