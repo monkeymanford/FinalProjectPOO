@@ -64,7 +64,7 @@ namespace Projet
 
             // *************************************************************************************
 
-            guichet.SetListGuichet(listeClients); // liste de clients envoyé à l'objet Guichet
+            guichet.SetListGuichet(listeClients); // liste de clients envoyée à l'objet Guichet
 
             bool showMenu = true;
             bool validation = true;
@@ -85,7 +85,7 @@ namespace Projet
                 tentatives++;
             }
 
-            if (isNotAdmin) Messages.Bonjour(guichet.GetPrenom());
+            if (isNotAdmin && tentatives < 3) Messages.Bonjour(guichet.GetPrenom());
 
             while (!(isNotAdmin)) // console administrateur si on login avec admin
             {
